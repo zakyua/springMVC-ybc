@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<a th:href="@{/employee}">访问员工信息</a>
+
+<a th:href="@{/testResponseBody}">响应</a>
+<a th:href="@{/down}">上传</a>
+<a th:href="@{/download}">下载</a>
+
+<a th:href="@{/testResponseUser}">响应json</a>
+
+<form th:action="@{/testRequestBody}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit">
+</form>
+
+
+<form th:action="@{/testRequestEntity}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit">
+</form>
+
+
+
+<div id="app">
+    <a th:href="@{/testAjax}" @click="testAjax">testAjax</a><br>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            testAjax:function (event) {
+                axios({
+                    method:"post",
+                    url:event.target.href,
+                    params:{
+                        username:"admin",
+                        password:"123456"
+                    }
+                }).then(function (response) {
+                    alert(response.data);
+                });
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>
